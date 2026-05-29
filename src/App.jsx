@@ -91,6 +91,36 @@ export default function App() {
       cta: "アプリを見る",
       icon: <PieChart className="w-6 h-6" />
     },
+    {
+      title: "和歌山県 医療提供体制マップ",
+      category: "医療政策・地域医療",
+      subtitle: "医師派遣・医療需要・経営指標の統合可視化",
+      description:
+        "二次医療圏や市町村ごとの医師派遣、将来人口推計に伴う医療需要、DPC病院の救急・高度医療実績、さらに公立病院等の経営指標を統合的に可視化・比較できるマップ・ダッシュボードです。",
+      points: [
+        "医師派遣・地域医師数・将来需要の地理的重ね合わせ",
+        "DPCデータに基づく救急搬送・機能集中のランキングや経営指標のクロス分析",
+      ],
+      tags: ["和歌山", "医療政策", "経営指標", "DPC分析", "地図可視化"],
+      href: "https://public-phi-steel.vercel.app",
+      cta: "マップ・分析を見る",
+      icon: <Layers className="w-6 h-6" />
+    },
+    {
+      title: "和歌山県議会 議事録検索",
+      category: "議会情報・テキストマイニング",
+      subtitle: "AI意味検索と要約で議員の質問を可視化",
+      description:
+        "和歌山県議会の議事録をもとに、キーワード検索だけでなくAIを用いた意味検索（セマンティック検索）に対応。議員ごとの質問傾向、要約、答弁抽出をスムーズに閲覧・分析できる非公式の公開閲覧システムです。",
+      points: [
+        "キーワード＋AI意味検索による柔軟な発言探索",
+        "議員別の質問履歴やAIによる要約・答弁抽出の整理",
+      ],
+      tags: ["和歌山", "地方議会", "意味検索", "AI要約", "テキストマイニング"],
+      href: "https://wakayamagijiroku.vercel.app",
+      cta: "議事録検索システムを見る",
+      icon: <FileText className="w-6 h-6" />
+    },
   ];
 
   const problems = [
