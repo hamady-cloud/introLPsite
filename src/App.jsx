@@ -121,6 +121,22 @@ export default function App() {
       cta: "議事録検索システムを見る",
       icon: <FileText className="w-6 h-6" />
     },
+    {
+      title: "地方行政の再設計 - Survival Design",
+      category: "地方自治・行政経営",
+      featured: true,
+      subtitle: "予算と権限の制約を直視し、「生き残る設計」へ",
+      description:
+        "地方行政の予算構造やEBPMの課題を可視化・分析。国の制度と地方の意思決定の二面性、硬直化する財政の現実を解き明かし、限られた新規財源や人口減少下の撤退戦略を構想するための考察、提案資料です。",
+      points: [
+        "予算・権限の制約と「純新規事業0.03%」のリアリティある財政分析",
+        "人口減少下における機能再編・撤退戦略とEBPM推進の論点整理",
+      ],
+      tags: ["地方自治", "行政経営", "EBPM", "財政分析", "和歌山"],
+      href: "https://lp-project-insight.vercel.app/",
+      cta: "分析サイトを見る",
+      icon: <Target className="w-6 h-6" />
+    },
   ];
 
   const problems = [
@@ -185,10 +201,19 @@ export default function App() {
                 行政実務で「どこを先に見るべきか」「なぜそう判断したか」を
                 可視化し、合意形成を加速させるツールを制作しています。
               </motion.p>
-              <motion.div variants={fadeInUp} className="flex gap-4">
+              <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
                 <a href="#works" className="px-8 py-4 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold rounded-2xl transition-all shadow-lg shadow-sky-500/25 flex items-center gap-2 group">
                   制作実績を見る
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a
+                  href="https://lp-project-insight.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-8 py-4 border border-white/15 bg-white/5 hover:bg-white/10 hover:border-sky-400/40 text-white font-bold rounded-2xl transition-all flex items-center gap-2 group"
+                >
+                  最新プロジェクトを見る
+                  <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
                 </a>
               </motion.div>
             </motion.div>
@@ -259,35 +284,62 @@ export default function App() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
               <div>
                 <h2 className="text-4xl md:text-6xl mb-4">Works</h2>
-                <p className="text-slate-400 text-lg">制作したダッシュボード・マップの実績</p>
+                <p className="text-slate-400 text-lg">制作したダッシュボード・マップ・政策分析サイトの実績</p>
               </div>
               <div className="h-[1px] flex-grow bg-white/10 hidden md:block mx-12 mb-4" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {works.map((work, i) => (
-                <motion.article 
+              {[...works].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))).map((work, i) => (
+                <motion.a
                   key={i}
+                  href={work.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${work.title}を新しいタブで開く`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -6 }}
+                  whileTap={{ scale: 0.99 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="group relative p-8 rounded-[2.5rem] border border-white/10 bg-white/5 overflow-hidden hover:border-sky-500/30 transition-colors"
+                  className={`group relative block p-8 md:p-10 rounded-[2.5rem] border overflow-hidden transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
+                    work.featured
+                      ? "md:col-span-2 border-sky-400/30 bg-gradient-to-br from-sky-500/15 via-indigo-500/10 to-purple-500/10 shadow-2xl shadow-sky-950/30 hover:border-sky-300/60"
+                      : "border-white/10 bg-white/5 hover:border-sky-500/30 hover:bg-white/[0.07]"
+                  }`}
                 >
+                  {work.featured && (
+                    <>
+                      <div className="absolute -top-24 -right-16 w-64 h-64 rounded-full bg-sky-400/15 blur-3xl pointer-events-none" />
+                      <div className="absolute -bottom-32 left-1/3 w-72 h-72 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
+                    </>
+                  )}
                   <div className="absolute top-0 right-0 p-8 text-sky-500/20 group-hover:text-sky-500/40 transition-colors">
                     {work.icon}
                   </div>
-                  <div className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-4">
-                    {work.category}
+                  <div className="relative flex flex-wrap items-center gap-3 mb-4">
+                    <div className="text-xs font-bold text-sky-400 uppercase tracking-widest">
+                      {work.category}
+                    </div>
+                    {work.featured && (
+                      <span className="px-3 py-1 rounded-full border border-sky-300/30 bg-sky-400/10 text-[10px] font-bold tracking-[0.18em] text-sky-200">
+                        NEW / FEATURED
+                      </span>
+                    )}
                   </div>
-                  <h3 className="text-2xl mb-2 group-hover:text-sky-300 transition-colors">{work.title}</h3>
-                  <p className="text-sm text-slate-500 mb-6">{work.subtitle}</p>
-                  
-                  <p className="text-slate-400 mb-8 line-clamp-2 text-sm leading-relaxed">
+                  <h3 className={`${work.featured ? "text-3xl md:text-4xl" : "text-2xl"} relative mb-2 pr-12 group-hover:text-sky-300 transition-colors`}>
+                    {work.title}
+                  </h3>
+                  <p className={`${work.featured ? "text-sky-100/70" : "text-slate-500"} relative text-sm mb-6`}>
+                    {work.subtitle}
+                  </p>
+
+                  <p className={`relative text-slate-400 mb-8 text-sm leading-relaxed ${work.featured ? "max-w-4xl" : "line-clamp-2"}`}>
                     {work.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-8">
+                  <div className="relative flex flex-wrap gap-2 mb-8">
                     {work.tags.map(tag => (
                       <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-slate-400">
                         {tag}
@@ -295,7 +347,7 @@ export default function App() {
                     ))}
                   </div>
 
-                  <ul className="space-y-3 mb-10">
+                  <ul className={`${work.featured ? "md:grid md:grid-cols-2 md:gap-x-8 md:space-y-0" : "space-y-3"} relative mb-10`}>
                     {work.points.map(pt => (
                       <li key={pt} className="flex items-start gap-3 text-xs text-slate-300">
                         <CheckCircle2 className="w-4 h-4 text-sky-500 shrink-0" />
@@ -304,16 +356,11 @@ export default function App() {
                     ))}
                   </ul>
 
-                  <a 
-                    href={work.href} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-sky-400 group/link"
-                  >
+                  <span className={`${work.featured ? "px-5 py-3 rounded-full bg-sky-400 text-slate-950 shadow-lg shadow-sky-500/20 group-hover:bg-sky-300" : "text-sky-400"} relative inline-flex items-center gap-2 text-sm font-bold transition-colors group/link`}>
                     {work.cta}
                     <ArrowUpRight className="w-4 h-4 group-hover/link:-translate-y-1 group-hover/link:translate-x-1 transition-transform" />
-                  </a>
-                </motion.article>
+                  </span>
+                </motion.a>
               ))}
             </div>
           </div>
